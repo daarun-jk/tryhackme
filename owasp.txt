@@ -1,3 +1,13 @@
+OWASP TOP 10
+
+SQL injection and command injection
+input is passed to SQL queries or system commands
+can be prevented using allow list(compared to a list to see if safe or not) and stripping input (dangerous charecters removed)
+
+passthru() in php 
+it executes what gets entered into the input then passing the output directly back to the browser.
+
+
 cut -d : -f 1 /etc/passwd
 to get the users from the /etc/passwd file
 
