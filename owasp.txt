@@ -1,0 +1,22 @@
+cut -d : -f 1 /etc/passwd
+to get the users from the /etc/passwd file
+
+w    (or)  who
+to list currently logged in users
+
+users
+to display the users
+
+lastlog
+recent login info
+
+lsb_release -a
+to check ubuntu version
+
+MOTD - message of the day (used to send a common message to all the users) (welcome message)
+/etc/motd is not a script but a text file. contents are shown before the first prompt of a login session.
+locate motd
+cat  /etc/update-motd.d/00-header
+
+Create a file in /etc/profile.d called greeting.sh
+If you don't want to do this for every user, add it to ~/.profile or ~/.bash_profile
