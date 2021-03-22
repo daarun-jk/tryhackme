@@ -30,3 +30,11 @@ cat  /etc/update-motd.d/00-header
 
 Create a file in /etc/profile.d called greeting.sh
 If you don't want to do this for every user, add it to ~/.profile or ~/.bash_profile
+
+
+Broken authentication
+A user would enter login credentials, the server would verify them. If they are correct, the server would then provide the users’ browser with a session cookie. 
+A session cookie is needed because web servers use HTTP(S) to communicate which is stateless. Attaching session cookies means that the server will know who is sending what data. The server can then keep track of users' actions. 
+
+re-registration of an existing user.
+say there is an existing user with the name admin and now we want to get access to their account so what we can do is try to re-register that username but with slight modification. We are going to enter " admin"(notice the space in the starting). Now when you enter that in the username field and enter other required information like email id or password and submit that data. It will actually register a new user but that user will have the same right as normal admin. That new user will also be able to see all the content presented under the user admin.
