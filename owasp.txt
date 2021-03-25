@@ -64,3 +64,4 @@ sqlite> .tables          (to see the tables in the DB)
 sqlite> PRAGMA table_info(useres);             (to see the table information)
 sqlite> SELECT * FROM users;
 found admin's hashed password. cracked it using crackstation. logged in as admin and found the flag
+
