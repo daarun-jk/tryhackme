@@ -187,3 +187,19 @@ Change "XSS Playground" to "I am a hacker" by adding a comment and using Javascr
 HTML DOM querySelector() - The querySelector() method only returns the first element that matches the specified selectors
 CSS Selector — #thm-title Selects the element with id=”thm-title”
 HTML DOM Text Content Property — If you set the textContent property, any child nodes are removed and replaced by a single Text node containing the specified string
+
+
+Insecure Deserialization 
+vulnerability which occurs when untrusted data is used to abuse the logic of an application
+replacing data processed by an application with malicious code; allowing anything from DoS to RCE that the attacker can use
+Low exploitability. This vulnerability is often a case-by-case basis - there is no reliable tool/framework for it. Because of its nature, attackers need to have a good understanding of the inner-workings of the ToE.
+
+the apache software foundation developed tomcat application
+DOS crashes services, can be done using insecure deserialisation
+
+Insecure Deserialization - Objects 
+A prominent element of object-oriented programming (OOP), objects are made up of two things:
+- State
+- Behaviour
+
+
