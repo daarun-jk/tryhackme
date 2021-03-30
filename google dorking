@@ -1,0 +1,17 @@
+crawler or spider to search WWW
+
+robots.txt
+first thing indexed by crawler.
+in root directory
+defines permissions like:
+User-agent:       (type of crawler:Googelbot,msnbot,Bingbot)
+Allow:
+Disallow:
+Sitemap:          (specify routes) (in XML)
+
+google dorking
+"query"           (exact phrase)
+site: ______  query
+filetype:
+cache:
+intitle:
