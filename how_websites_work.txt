@@ -33,4 +33,16 @@ HTML elements can also have events, such as "onclick" or "onhover" that execute 
 Sensitive Data Exposure 
 Whenever you're assessing a web application for security issues, one of the first things you should do is review the page source code to see if you can find any exposed login credentials or hidden links.
 
-      
+HTML Injection:     (client side)
+HTML Injection is a vulnerability that occurs when unfiltered user input is displayed on the page.
+Example:
+<script>
+    function sayHi()
+    {
+        const name=document.getElementById('name').value
+        document.getElementById('welcome-msg').innerHTML = "welcome" + name
+    }
+</script>
+
+<a href="http://hacker.com"></a>
+to get the output for the challenge:  HTML_INJ3CTI0N
