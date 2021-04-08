@@ -1,1 +1,8 @@
+Intro
+ports - for multiple services to be available, to direct traffic to right application. total : 65535, 1024- well known ports
+
+Nmap Switches
+
+
+
 
