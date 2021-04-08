@@ -1,1 +1,60 @@
+OSI model
+7.Application - works with applications
+6.Presentation - translates data into a standardized format, handles encryption, compression and other transformations of data
+5.Session - maitain session if connecction is setup, session- unique, tracks communication.
+4.Transport - chooses between and TCP and UDP, divides transmission up into bite-sized pieces.
+3.Network - to locate destination.
+2.Data Link - physical addressing of transmission, present data in a suitable format for transmission. error detection
+1.Physical - electric pulses that make up the data, convert binary data to signals
 
+Encapsulation and De-encapsulaton
+header added at each layer
+provides an extra layer of security.
+
+TCP/IP model
+Application
+Transport
+Internet
+Network Interface
+These 4 is official, defined in RFC 1122
+was introduced before OSI model
+
+Ping
+to test connection
+uses ICMP protocol (in network layer)
+Ex:
+ping google.com
+switches:
+-i      ( change interval of sent ping requests )
+-4      ( IPv4 only )
+-v      ( verbose )
+
+Traceroute
+path to reach destination   (uses UDP protocol on Unix)
+Ex:
+traceroute google.com 
+tracert  ( in windows )  uses ICMP protocol
+switches:
+-i      ( to specify an interface )
+-T      ( to use TCP SYN requests )
+
+Whois
+to know who has registered a domain name
+personal details are redacted in Europe, but can get more info from other places
+whois <domain>
+ex:
+whois bbc.co.uk
+web version : www.whois.com/whois
+
+Dig
+URL to IP : source -> recursive DNS server -> root name server -> Top-level domain servers -> Authoritative name servers
+sees local cache first, if not found, will send to recursive DNS server (automatically known to router). 
+recursive DNS server will check its cache, if not found, sends to root name server. 
+total:13 root name servers. these keep track of DNS servers in next level down called Top-level domain servers.
+TLD servers are split into extensions (.com, .co.uk,). TLD servers keep track of next level down servers, called authoritative name servers
+Authoritative name servers - used to store DNS records for domain directly. Every domain in the world will have its DNS records stored on an Authoritative name server somewhere.
+dig - to manually query recursive DNS servers 
+dig <domain> @<dns-server-ip>
+ex:
+dig google.com @1.1.1.1
+dig gives TTL also   (measured in seconds)
