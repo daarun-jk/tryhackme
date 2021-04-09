@@ -1,7 +1,7 @@
 OSI model
 7.Application - works with applications
 6.Presentation - translates data into a standardized format, handles encryption, compression and other transformations of data
-5.Session - maitain session if connecction is setup, session- unique, tracks communication.
+5.Session - maitain session if connec tion is setup, session- unique, tracks communication.
 4.Transport - chooses between and TCP and UDP, divides transmission up into bite-sized pieces.
 3.Network - to locate destination.
 2.Data Link - physical addressing of transmission, present data in a suitable format for transmission. error detection
