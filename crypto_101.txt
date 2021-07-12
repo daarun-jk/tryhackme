@@ -2,9 +2,13 @@ Encoding - NOT a form of encryption, just a form of data representation like bas
 Passphrase - Separate to the key, a passphrase is similar to a password and used to protect a key.
 Standards like PCI-DSS state that the data should be encrypted both at rest (in storage) AND while being transmitted.
 
+----------------
+
 Types of encryption
 1. Symmetric encryption - uses same key to encrypt and decrypt data. Ex: DES (Broken) and AES. Faster than asymmetric cryptography, and use smaller keys (128 or 256 bit keys are common for AES, DES keys are 56 bits long).
 2. Asymmetric encryption - uses a pair of keys, public key and private key,one to encrypt and the other to decrypt. Ex: RSA and Elliptic Curve Cryptography. Slower and uses larger keys, for example RSA typically uses 2048 to 4096 bit keys.
+
+--------------------
 
 RSA - Rivest Shamir Adleman
 Tools for defeating RSA challenges in CTFs, https://github.com/Ganapati/RsaCtfTool and https://github.com/ius/rsatool.
@@ -14,11 +18,15 @@ The public key is n and e, the private key is n and d.
 “m” is used to represent the message (in plaintext) and “c” represents the ciphertext (encrypted text).
 To learn the maths behind it,  https://muirlandoracle.co.uk/2020/01/29/rsa-encryption/.
 
+------------------------
+
 Establishing Keys Using Asymmetric Cryptography
 A symmetric encryption key is encrypted using the server’s public key and sent to the server which can be decrypted using the server’s private key only.
 Asymmetric cryptography is used only once, so it’s fast, and you can now communicate privately with symmetric encryption.
 In reality, to verify the person you’re talking to is who they say they are, is done using digital signatures and certificates.
 https://robertheaton.com/2014/03/27/how-does-https-actually-work/
+
+---------------------------
 
 Digital signatures and Certificates
 Digital signatures 
@@ -28,12 +36,25 @@ Also a key use of public key cryptography, linked to digital signatures. A commo
 The web server has a certificate that says it is the real tryhackme.com. The certificates have a chain of trust, starting with a root CA (certificate authority). Root CAs are automatically trusted by your device, OS, or browser from install. Certs below that are trusted because the Root CAs say they trust that organisation. Certificates below that are trusted because the organisation is trusted by the Root CA and so on. There are long chains of trust.
 https://robertheaton.com/2014/03/27/how-does-https-actually-work/
 
+-------------------
+
 SSH authentication
 By default, SSH is authenticated using usernames and passwords
 Machine can also have SSH configured with key authentication instead. This uses public and private keys. By default, SSH keys are RSA keys. You can choose which algorithm to generate, and/or add a passphrase to encrypt the SSH key. ssh-keygen is the program used to generate pairs of keys most of the time.
+
 The ~/.ssh folder is the default place to store these keys for OpenSSH. The authorized_keys file in this directory holds public keys that are allowed to access the server if key authentication is enabled.
-In order to use a private SSH key, the permissions must be set up correctly otherwise your SSH client will ignore the file with a warning. Only the owner should be able to read or write to the private key (600 or stricter). ssh -i keyNameGoesHere user@host is how you specify a key for the standard Linux OpenSSH client.
+
+In order to use a private SSH key, the permissions must be set up correctly otherwise your SSH client will ignore the file with a warning. Only the owner should be able to read or write to the private key (600 or stricter). 
+ssh -i keyNameGoesHere user@host is how you specify a key for the standard Linux OpenSSH client.
+
 SSH keys are an excellent way to “upgrade” a reverse shell, assuming the user has login enabled (www-data normally does not, but regular users and root will). Leaving an SSH key in authorized_keys on a box can be a useful backdoor, and you don't need to deal with any of the issues of unstabilised reverse shells like Control-C or lack of tab completion.
+
+Crack the password with John The Ripper and rockyou, what's the passphrase for the key? given id_rsa file
+Steps:
+1. install ssh2john (wget https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/ssh2john.py)
+2. Crack the Private Key (python ssh2john.py id_rsa > id_rsa.hash) (john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa.hash)
+
+--------------------
 
 Explaining Diffie Hellman Key Exchange
 To establish a common key, can use symmetric cryptography, but if you don’t want to use key exchange with asymmetric cryptography, can use DH Key Exchange.
